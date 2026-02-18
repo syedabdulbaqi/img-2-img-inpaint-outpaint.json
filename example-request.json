@@ -1,0 +1,188 @@
+{
+  "input": {
+    "workflow": {
+      "42": {
+        "inputs": {
+          "ckpt_name": "juggernautXL_versionXInpaint.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple",
+        "_meta": {
+          "title": "CheckpointLoaderSimple"
+        }
+      },
+      "43": {
+        "inputs": {
+          "text": "expand scene, no person, no watermark, no signature, j_cartoon",
+          "clip": [
+            "62",
+            1
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIPTextEncode"
+        }
+      },
+      "44": {
+        "inputs": {
+          "text": "people, hands, face, characters, cartoon eyes, distortion, warped metal, blurry, low detail, messy background, extra objects, unrealistic shapes, broken mechanism, exaggerated proportions, text artifacts, watermark, signature, trademark",
+          "clip": [
+            "62",
+            1
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIPTextEncode"
+        }
+      },
+      "45": {
+        "inputs": {
+          "seed": 894075355643096,
+          "steps": 30,
+          "cfg": 7,
+          "sampler_name": "dpmpp_2m_sde_gpu",
+          "scheduler": "karras",
+          "denoise": 0.9,
+          "model": [
+            "62",
+            0
+          ],
+          "positive": [
+            "53",
+            0
+          ],
+          "negative": [
+            "53",
+            1
+          ],
+          "latent_image": [
+            "53",
+            2
+          ]
+        },
+        "class_type": "KSampler",
+        "_meta": {
+          "title": "KSampler"
+        }
+      },
+      "46": {
+        "inputs": {
+          "samples": [
+            "45",
+            0
+          ],
+          "vae": [
+            "42",
+            2
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "47": {
+        "inputs": {
+          "filename_prefix": "armchair",
+          "images": [
+            "61",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "SaveImage"
+        }
+      },
+      "48": {
+        "inputs": {
+          "image": "comfy_res_o_00004_.png"
+        },
+        "class_type": "LoadImage",
+        "_meta": {
+          "title": "LoadImage"
+        }
+      },
+      "53": {
+        "inputs": {
+          "value": true,
+          "positive": [
+            "43",
+            0
+          ],
+          "negative": [
+            "44",
+            0
+          ],
+          "vae": [
+            "42",
+            2
+          ],
+          "pixels": [
+            "60",
+            1
+          ],
+          "mask": [
+            "60",
+            2
+          ]
+        },
+        "class_type": "InpaintModelConditioning",
+        "_meta": {
+          "title": "InpaintModelConditioning"
+        }
+      },
+      "60": {
+        "inputs": {
+          "text": "bilinear",
+          "image": [
+            "48",
+            0
+          ],
+          "mask": [
+            "48",
+            1
+          ]
+        },
+        "class_type": "InpaintCropImproved",
+        "_meta": {
+          "title": "InpaintCropImproved"
+        }
+      },
+      "61": {
+        "inputs": {
+          "stitcher": [
+            "60",
+            0
+          ],
+          "inpainted_image": [
+            "46",
+            0
+          ]
+        },
+        "class_type": "InpaintStitchImproved",
+        "_meta": {
+          "title": "InpaintStitchImproved"
+        }
+      },
+      "62": {
+        "inputs": {
+          "filename": "J_cartoon.safetensors",
+          "model": [
+            "42",
+            0
+          ],
+          "clip": [
+            "42",
+            1
+          ]
+        },
+        "class_type": "LoraLoader|pysssss",
+        "_meta": {
+          "title": "LoraLoader|pysssss"
+        }
+      }
+    }
+  }
+}
